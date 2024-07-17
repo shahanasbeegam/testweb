@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediture Consultancy LLP</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .banner {
+            background-image: url('https://via.placeholder.com/1200x400.png?text=Banner+Image');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .banner p {
+            font-size: 1.5rem;
+        }
+        .section-title {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .service, .profession {
+            margin-bottom: 2rem;
+        }
+        .form-container {
+            padding: 2rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+        }
+        .social-media a {
+            margin: 0 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .floating-buttons a {
+            display: block;
+            margin: 10px 0;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            font-size: 24px;
+        }
+        .floating-buttons a.whatsapp {
+            background-color: #25d366;
+        }
+        .floating-buttons a.instagram {
+            background-color: #e4405f;
+        }
+        .testimonial {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .testimonial img {
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .why-us .card {
+            margin: 10px 0;
+        }
+        .icon {
+            font-size: 4rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Mediture Consultancy LLP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#procedures">Our Procedures</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services Offered</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#whyus">Why Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <div class="text-center">
+            <h1>Welcome to Mediture Consultancy LLP</h1>
+            <p>Your Trusted Partner in Medical Licensing and Examination Procedures</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <section id="about" class="section">
+            <h2 class="section-title">About Us</h2>
+            <p>At Mediture Consultancy LLP, we are dedicated to providing expert guidance and comprehensive support to medical professionals navigating the complexities of licensing and examination processes. Based in Kerala, India, our mission is to help healthcare practitioners achieve their career aspirations efficiently and effectively.</p>
+        </section>
+
+        <section id="procedures" class="section">
+            <h2 class="section-title">Our Procedures</h2>
+            <div class="row">
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=DHA" alt="DHA" class="img-fluid">
+                    <h3>DHA</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=UAE+MOH" alt="UAE MOH" class="img-fluid">
+                    <h3>UAE MOH</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=HAAD" alt="HAAD" class="img-fluid">
+                    <h3>HAAD</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=Prometric+Exams" alt="Prometric Exams" class="img-fluid">
+                    <h3>Prometric Exams</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=OET" alt="OET" class="img-fluid">
+                    <h3>OET</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=Qatar+Prometric" alt="Qatar Prometric" class="img-fluid">
+                    <h3>Qatar Prometric</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=NHRA+(Bahrain)" alt="NHRA (Bahrain)" class="img-fluid">
+                    <h3>NHRA (Bahrain)</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=Oman+Prometric" alt="Oman Prometric" class="img-fluid">
+                    <h3>Oman Prometric</h3>
+                </div>
+                <div class="col-md-4 service">
+                    <img src="https://via.placeholder.com/300.png?text=Saudi+Prometric" alt="Saudi Prometric" class="img-fluid">
+                    <h3>Saudi Prometric</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2 class="section-title">Services Offered For</h2>
+            <div class="row">
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-user-nurse icon"></i>
+                    <h3>Nurses</h3>
+                </div>
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-pills icon"></i>
+                    <h3>Pharmacists</h3>
+                </div>
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-microscope icon"></i>
+                    <h3>Medical Laboratory Technicians (MLT)</h3>
+                </div>
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-tooth icon"></i>
+                    <h3>Dentists (BDS)</h3>
+                </div>
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-user-md icon"></i>
+                    <h3>Doctors (MBBS)</h3>
+                </div>
+                <div class="col-md-4 profession">
+                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
+                    <i class="fas fa-user icon"></i>
+                    <h3>All Other Medical Professionals</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client 1">
+                        <h4>Client 1</h4>
+                        <p>"Mediture Consultancy LLP made my licensing process seamless and stress-free. Highly recommend their services!"</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client 2">
+                        <h4>Client 2</h4>
+                        <p>"The team was professional and very helpful throughout the entire process. I couldn't have done it without them."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial text-center">
+                        <img src="https://via.placeholder.com/100" alt="Client 3">
+                        <h4>Client 3</h4>
+                        <p>"Exceptional service! They guided me through every step and ensured everything was in order."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="whyus" class="section">
+            <h2 class="section-title">Why Us</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-star icon"></i>
+                            <h5 class="card-title">Expert Guidance</h5>
+                            <p class="card-text">Our team consists of experts who are well-versed in the medical licensing procedures and provide accurate guidance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-shield-alt icon"></i>
+                            <h5 class="card-title">Reliable Service</h5>
+                            <p class="card-text">We ensure reliable and trustworthy services to our clients, helping them achieve their professional goals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-thumbs-up icon"></i>
+                            <h5 class="card-title">Customer Satisfaction</h5>
+                            <p class="card-text">Customer satisfaction is our top priority. We work diligently to meet and exceed client expectations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="section-title">Book a Consultancy</h2>
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile:</label>
+                        <input type="tel" class="form-control" id="mobile" name="mobile" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="place">Place:</label>
+                        <input type="text" class="form-control" id="place" name="place" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profession">Profession:</label>
+                        <select class="form-control" id="profession" name="profession" required>
+                            <option>Nurse</option>
+                            <option>Pharmacist</option>
+                            <option>MLT</option>
+                            <option>BDS</option>
+                            <option>MBBS</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center">
+        <p>&copy; 2024 Mediture Consultancy LLP. All rights reserved.</p>
+        <div class="social-media">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>Contact Us: 21/265B, Kalappadan Building, Mylappuram, Tirur Road, Downhill PO, Malappuram, Kerala, PIN-676519</p>
+        <p>Phone: 8089535273</p>
+        <p><a href="#contact" class="text-white">Book a Consultancy</a></p>
+    </footer>
+
+    <div class="floating-buttons">
+        <a href="https://wa.me/yourwhatsappnumber" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/yourinstagramprofile" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html
