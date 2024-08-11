@@ -3,332 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediture Consultancy LLP</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <title>Task Scheduler Dashboard</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
         }
-        .banner {
-            background-image: url('https://via.placeholder.com/1200x400.png?text=Banner+Image');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        h1, h2 {
             text-align: center;
+            color: #333;
         }
-        .banner h1 {
-            font-size: 3rem;
+        .date-display {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
             font-weight: bold;
         }
-        .banner p {
-            font-size: 1.5rem;
-        }
-        .section-title {
-            margin: 2rem 0;
+        .signin-form, .admin-form {
             text-align: center;
+            margin-bottom: 20px;
         }
-        .service, .profession {
-            margin-bottom: 2rem;
+        .signin-form input, .signin-form button, .admin-form input, .admin-form button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-        .form-container {
-            padding: 2rem;
-            background-color: white;
+        .task-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .task-form select,
+        .task-form input,
+        .task-form button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .view-options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .view-options button {
+            margin: 0 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+        }
+        .dashboard {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 1rem 0;
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
-        .social-media a {
-            margin: 0 0.5rem;
-            color: white;
-            text-decoration: none;
+        .task-column {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .floating-buttons {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+        .task-column h3 {
+            display: flex;
+            align-items: center;
         }
-        .floating-buttons a {
-            display: block;
-            margin: 10px 0;
-            width: 50px;
-            height: 50px;
-            background-color: white;
+        .task-column img {
             border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            line-height: 50px;
-            color: #fff;
-            font-size: 24px;
+            margin-right: 10px;
+            width: 40px;
+            height: 40px;
         }
-        .floating-buttons a.whatsapp {
-            background-color: #25d366;
+        .task-list {
+            list-style-type: none;
+            padding: 0;
         }
-        .floating-buttons a.instagram {
-            background-color: #e4405f;
-        }
-        .testimonial {
+        .task-item {
             background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 5px;
-        }
-        .testimonial img {
-            border-radius: 50%;
             margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
-        .why-us .card {
-            margin: 10px 0;
+        .task-item.low { background-color: #d4edda; } /* Green for low priority */
+        .task-item.medium { background-color: #fff3cd; } /* Yellow for medium priority */
+        .task-item.high { background-color: #f8d7da; } /* Red for high priority */
+        .task-item.finished { background-color: #d6d8db; text-decoration: line-through; } /* Grey for finished tasks */
+        .task-details {
+            display: flex;
+            flex-direction: column;
         }
-        .icon {
-            font-size: 4rem;
-            color: #007bff;
-            margin-bottom: 1rem;
+        .task-time, .task-deadline, .task-assigned-by {
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        .task-actions button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .task-actions .edit-btn {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .task-actions .delete-btn {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .task-actions .finish-btn {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .admin-form {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Mediture Consultancy LLP</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#procedures">Our Procedures</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services Offered</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#whyus">Why Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <h1>Task Scheduler Dashboard</h1>
 
-    <div class="banner">
-        <div class="text-center">
-            <h1>Welcome to Mediture Consultancy LLP</h1>
-            <p>Your Trusted Partner in Medical Licensing and Examination Procedures</p>
+    <div class="date-display" id="currentDate"></div>
+
+    <div class="signin-form">
+        <input type="text" id="username" placeholder="Enter your name">
+        <button onclick="signin()">Sign In</button>
+        <button onclick="showAdminLogin()">Admin Login</button>
+    </div>
+
+    <div class="admin-form" id="adminForm">
+        <h2>Admin Login</h2>
+        <input type="password" id="adminPassword" placeholder="Enter admin password">
+        <button onclick="adminLogin()">Login</button>
+    </div>
+
+    <div class="task-form">
+        <h2>Add New Task</h2>
+        <label for="assignee">Assign To:</label>
+        <select id="assignee">
+            <option value="Person 1">Person 1</option>
+            <option value="Person 2">Person 2</option>
+            <option value="Person 3">Person 3</option>
+            <!-- Add options for all 10-15 members -->
+        </select>
+
+        <label for="task">Task:</label>
+        <input type="text" id="task" placeholder="Enter task description">
+
+        <label for="priority">Priority:</label>
+        <select id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <label for="time">Time Box (hours):</label>
+        <input type="number" id="time" min="1" max="24" placeholder="Enter time in hours">
+
+        <label for="deadline">Deadline Date:</label>
+        <input type="date" id="deadline-date">
+
+        <label for="deadline-time">Deadline Time:</label>
+        <input type="time" id="deadline-time">
+
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <div class="view-options">
+        <button onclick="filterTasks('daily')">Daily</button>
+        <button onclick="filterTasks('weekly')">Weekly</button>
+        <button onclick="filterTasks('monthly')">Monthly</button>
+    </div>
+
+    <div class="dashboard">
+        <h2>Task Dashboard</h2>
+        <div class="task-grid" id="taskGrid">
+            <!-- Task columns for each person will be added here -->
         </div>
     </div>
 
-    <div class="container my-5">
-        <section id="about" class="section">
-            <h2 class="section-title">About Us</h2>
-            <p>At Mediture Consultancy LLP, we are dedicated to providing expert guidance and comprehensive support to medical professionals navigating the complexities of licensing and examination processes. Based in Kerala, India, our mission is to help healthcare practitioners achieve their career aspirations efficiently and effectively.</p>
-        </section>
+    <script>
+        const members = [
+            { name: "Person 1", img: "profile1.jpg" },
+            { name: "Person 2", img: "profile2.jpg" },
+            { name: "Person 3", img: "profile3.jpg" },
+            // Add all members here with their profile images
+        ];
+        let currentUser = '';
+        let isAdmin = false;
 
-        <section id="procedures" class="section">
-            <h2 class="section-title">Our Procedures</h2>
-            <div class="row">
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=DHA" alt="DHA" class="img-fluid">
-                    <h3>DHA</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=UAE+MOH" alt="UAE MOH" class="img-fluid">
-                    <h3>UAE MOH</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=HAAD" alt="HAAD" class="img-fluid">
-                    <h3>HAAD</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=Prometric+Exams" alt="Prometric Exams" class="img-fluid">
-                    <h3>Prometric Exams</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=OET" alt="OET" class="img-fluid">
-                    <h3>OET</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=Qatar+Prometric" alt="Qatar Prometric" class="img-fluid">
-                    <h3>Qatar Prometric</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=NHRA+(Bahrain)" alt="NHRA (Bahrain)" class="img-fluid">
-                    <h3>NHRA (Bahrain)</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=Oman+Prometric" alt="Oman Prometric" class="img-fluid">
-                    <h3>Oman Prometric</h3>
-                </div>
-                <div class="col-md-4 service">
-                    <img src="https://via.placeholder.com/300.png?text=Saudi+Prometric" alt="Saudi Prometric" class="img-fluid">
-                    <h3>Saudi Prometric</h3>
-                </div>
-            </div>
-        </section>
+        function signin() {
+            currentUser = document.getElementById('username').value;
+            if (currentUser) {
+                alert(`Signed in as ${currentUser}`);
+            } else {
+                alert('Please enter your name to sign in.');
+            }
+        }
 
-        <section id="services" class="section">
-            <h2 class="section-title">Services Offered For</h2>
-            <div class="row">
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-user-nurse icon"></i>
-                    <h3>Nurses</h3>
-                </div>
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-pills icon"></i>
-                    <h3>Pharmacists</h3>
-                </div>
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-microscope icon"></i>
-                    <h3>Medical Laboratory Technicians (MLT)</h3>
-                </div>
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-tooth icon"></i>
-                    <h3>Dentists (BDS)</h3>
-                </div>
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-user-md icon"></i>
-                    <h3>Doctors (MBBS)</h3>
-                </div>
-                <div class="col-md-4 profession">
-                    <img src="https://www.countryflags.io/IN/shiny/64.png" alt="India Flag" class="img-fluid">
-                    <i class="fas fa-user icon"></i>
-                    <h3>All Other Medical Professionals</h3>
-                </div>
-            </div>
-        </section>
+        function showAdminLogin() {
+            document.getElementById('adminForm').style.display = 'block';
+        }
 
-        <section id="testimonials" class="section">
-            <h2 class="section-title">Testimonials</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial text-center">
-                        <img src="https://via.placeholder.com/100" alt="Client 1">
-                        <h4>Client 1</h4>
-                        <p>"Mediture Consultancy LLP made my licensing process seamless and stress-free. Highly recommend their services!"</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial text-center">
-                        <img src="https://via.placeholder.com/100" alt="Client 2">
-                        <h4>Client 2</h4>
-                        <p>"The team was professional and very helpful throughout the entire process. I couldn't have done it without them."</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial text-center">
-                        <img src="https://via.placeholder.com/100" alt="Client 3">
-                        <h4>Client 3</h4>
-                        <p>"Exceptional service! They guided me through every step and ensured everything was in order."</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'adminpassword') {  // Simple password check (should be secured)
+                isAdmin = true;
+                alert('Admin login successful');
+                document.getElementById('adminForm').style.display = 'none';
+            } else {
+                alert('Incorrect admin password');
+            }
+        }
 
-        <section id="whyus" class="section">
-            <h2 class="section-title">Why Us</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-star icon"></i>
-                            <h5 class="card-title">Expert Guidance</h5>
-                            <p class="card-text">Our team consists of experts who are well-versed in the medical licensing procedures and provide accurate guidance.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-shield-alt icon"></i>
-                            <h5 class="card-title">Reliable Service</h5>
-                            <p class="card-text">We ensure reliable and trustworthy services to our clients, helping them achieve their professional goals.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-thumbs-up icon"></i>
-                            <h5 class="card-title">Customer Satisfaction</h5>
-                            <p class="card-text">Customer satisfaction is our top priority. We work diligently to meet and exceed client expectations.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        function initializeDashboard() {
+            const taskGrid = document.getElementById('taskGrid');
+            members.forEach(member => {
+                const column = document.createElement('div');
+                column.className = 'task-column';
+                column.id = `column-${member.name.replace(/\s+/g, '')}`;
+                column.innerHTML = `
+                    <h3><img src="${member.img}" alt="${member.name}">${member.name}</h3>
+                    <ul class="task-list" id="taskList-${member.name.replace(/\s+/g, '')}"></ul>
+                `;
+                taskGrid.appendChild(column);
+            });
 
-        <section id="contact" class="section">
-            <h2 class="section-title">Book a Consultancy</h2>
-            <div class="form-container">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="mobile">Mobile:</label>
-                        <input type="tel" class="form-control" id="mobile" name="mobile" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="place">Place:</label>
-                        <input type="text" class="form-control" id="place" name="place" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="profession">Profession:</label>
-                        <select class="form-control" id="profession" name="profession" required>
-                            <option>Nurse</option>
-                            <option>Pharmacist</option>
-                            <option>MLT</option>
-                            <option>BDS</option>
-                            <option>MBBS</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </section>
-    </div>
+            // Display today's date
+            const currentDate = new Date().toLocaleDateString();
+            document.getElementById('currentDate').innerText = `Today's Date: ${currentDate}`;
+        }
 
-    <footer class="text-center">
-        <p>&copy; 2024 Mediture Consultancy LLP. All rights reserved.</p>
-        <div class="social-media">
-            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-        <p>Contact Us: 21/265B, Kalappadan Building, Mylappuram, Tirur Road, Downhill PO, Malappuram, Kerala, PIN-676519</p>
-        <p>Phone: 8089535273</p>
-        <p><a href="#contact" class="text-white">Book a Consultancy</a></p>
-    </footer>
+        function addTask() {
+            const assignee = document.getElementById('assignee').value;
+            const task = document.getElementById('task').value;
+            const priority = document.getElementById('priority').value;
+            const time = document.getElementById('time').value;
+            const deadlineDate = document.getElementById('deadline-date').value;
+            const deadlineTime = document.getElementById('deadline-time').value;
 
-    <div class="floating-buttons">
-        <a href="https://wa.me/yourwhatsappnumber" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://www.instagram.com/yourinstagramprofile" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
+            if (assignee && task && priority && time && deadlineDate && deadlineTime && currentUser) {
+                const taskList = document.getElementById(`taskList-${assignee.replace(/\s+/g, '')}`);
+                const taskItem = document.createElement('li');
+                taskItem.className = `task-item ${priority}`;
+                taskItem.innerHTML = `
+                    <div class="task-details">
+                        <span>${task}</span>
+                        <span class="task-time">Time: ${time} hrs</span>
+                        <span class="task-deadline">Deadline: ${deadlineDate} ${deadlineTime}</span>
+                        <span class="task-assigned-by">Assigned by: ${currentUser}</span>
+                    </div>
+                    <div class="task-actions">
+                        <button class="edit-btn" onclick="editTask(this)">Edit</button>
+                        <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+                        <button class="finish-btn" onclick="finishTask(this)">Mark Finished</button>
+                    </div>
+                `;
+                taskList.appendChild(taskItem);
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                // Clear the form fields
+                document.getElementById('task').value = '';
+                document.getElementById('priority').value = 'low';
+                document.getElementById('time').value = '';
+                document.getElementById('deadline-date').value = '';
+                document.getElementById('deadline-time').value = '';
+            } else {
+                alert('Please fill in all fields and sign in before adding a task.');
+            }
+        }
+
+        function filterTasks(period) {
+            alert(`Filtering tasks for the ${period} view is not yet implemented.`);
+        }
+
+        function editTask(button) {
+            alert('Editing tasks is not yet implemented.');
+        }
+
+        function deleteTask(button) {
+            const taskItem = button.closest('.task-item');
+            taskItem.remove();
+        }
+
+        function finishTask(button) {
+            const taskItem = button.closest('.task-item');
+            taskItem.classList.add('finished');
+        }
+
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+    </script>
+
 </body>
-</html
+</html>
