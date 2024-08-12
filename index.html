@@ -3,321 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Scheduler Dashboard </title>
+    <title>Task Scheduler App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
-            padding: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-        .date-display {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .signin-form, .admin-form {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .signin-form input, .signin-form button, .admin-form input, .admin-form button {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .task-form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .task-form select,
-        .task-form input,
-        .task-form button {
-            margin: 10px 0;
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .view-options {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        .view-options button {
-            margin: 0 5px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-        }
-        .dashboard {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .task-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .task-column {
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .task-column h3 {
-            display: flex;
-            align-items: center;
-        }
-        .task-column img {
-            border-radius: 50%;
-            margin-right: 10px;
-            width: 40px;
-            height: 40px;
-        }
-        .task-list {
-            list-style-type: none;
             padding: 0;
         }
-        .task-item {
-            background-color: #fff;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .task-item.low { background-color: #d4edda; } /* Green for low priority */
-        .task-item.medium { background-color: #fff3cd; } /* Yellow for medium priority */
-        .task-item.high { background-color: #f8d7da; } /* Red for high priority */
-        .task-item.finished { background-color: #d6d8db; text-decoration: line-through; } /* Grey for finished tasks */
-        .task-details {
-            display: flex;
-            flex-direction: column;
-        }
-        .task-time, .task-deadline, .task-assigned-by {
-            font-weight: bold;
-            margin-left: 20px;
-        }
-        .task-actions button {
-            margin: 5px;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .task-actions .edit-btn {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .task-actions .delete-btn {
-            background-color: #dc3545;
-            color: #fff;
-        }
-        .task-actions .finish-btn {
-            background-color: #28a745;
-            color: #fff;
-        }
-        .admin-form {
-            display: none;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .navbar {
             margin-bottom: 20px;
+        }
+        .task-card {
+            margin-bottom: 15px;
+            border-left: 5px solid;
+        }
+        .task-card.finished {
+            background-color: #e9ecef;
+            text-decoration: line-through;
+        }
+        .task-details {
+            font-size: 0.9rem;
+        }
+        .task-actions {
+            text-align: right;
+        }
+        .task-list {
+            padding-left: 0;
+            list-style: none;
+        }
+        .priority-high {
+            border-color: #dc3545;
+        }
+        .priority-medium {
+            border-color: #ffc107;
+        }
+        .priority-low {
+            border-color: #28a745;
+        }
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .filter-btn {
+            margin-right: 10px;
+        }
+        .modal .modal-body .form-control {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Task Scheduler Dashboard</h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Task Scheduler</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="signIn()">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="adminLogin()">Admin</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="date-display" id="currentDate"></div>
-
-    <div class="signin-form">
-        <input type="text" id="username" placeholder="Enter your name">
-        <button onclick="signin()">Sign In</button>
-        <button onclick="showAdminLogin()">Admin Login</button>
+    <!-- Filters -->
+    <div class="container mb-3">
+        <button class="btn btn-outline-primary filter-btn" onclick="filterTasks('daily')">Daily</button>
+        <button class="btn btn-outline-secondary filter-btn" onclick="filterTasks('weekly')">Weekly</button>
+        <button class="btn btn-outline-success filter-btn" onclick="filterTasks('monthly')">Monthly</button>
     </div>
 
-    <div class="admin-form" id="adminForm">
-        <h2>Admin Login</h2>
-        <input type="password" id="adminPassword" placeholder="Enter admin password">
-        <button onclick="adminLogin()">Login</button>
+    <!-- Task Grid -->
+    <div class="container">
+        <div id="taskGrid" class="row"></div>
     </div>
 
-    <div class="task-form">
-        <h2>Add New Task</h2>
-        <label for="assignee">Assign To:</label>
-        <select id="assignee">
-            <option value="Person 1">Person 1</option>
-            <option value="Person 2">Person 2</option>
-            <option value="Person 3">Person 3</option>
-            <!-- Add options for all 10-15 members -->
-        </select>
-
-        <label for="task">Task:</label>
-        <input type="text" id="task" placeholder="Enter task description">
-
-        <label for="priority">Priority:</label>
-        <select id="priority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
-
-        <label for="time">Time Box (hours):</label>
-        <input type="number" id="time" min="1" max="24" placeholder="Enter time in hours">
-
-        <label for="deadline">Deadline Date:</label>
-        <input type="date" id="deadline-date">
-
-        <label for="deadline-time">Deadline Time:</label>
-        <input type="time" id="deadline-time">
-
-        <button onclick="addTask()">Add Task</button>
-    </div>
-
-    <div class="view-options">
-        <button onclick="filterTasks('daily')">Daily</button>
-        <button onclick="filterTasks('weekly')">Weekly</button>
-        <button onclick="filterTasks('monthly')">Monthly</button>
-    </div>
-
-    <div class="dashboard">
-        <h2>Task Dashboard</h2>
-        <div class="task-grid" id="taskGrid">
-            <!-- Task columns for each person will be added here -->
+    <!-- Task Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taskModalLabel">Add/Edit Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="taskForm">
+                        <input type="hidden" id="taskId">
+                        <div class="mb-3">
+                            <label for="assignee" class="form-label">Assign To</label>
+                            <select class="form-select" id="assignee"></select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task" class="form-label">Task</label>
+                            <input type="text" class="form-control" id="task" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select class="form-select" id="priority">
+                                <option value="low" class="priority-low">Low</option>
+                                <option value="medium" class="priority-medium">Medium</option>
+                                <option value="high" class="priority-high">High</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Estimated Time (hrs)</label>
+                            <input type="number" class="form-control" id="time" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadline-date" class="form-label">Deadline Date</label>
+                            <input type="date" class="form-control" id="deadline-date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deadline-time" class="form-label">Deadline Time</label>
+                            <input type="time" class="form-control" id="deadline-time" required>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100" onclick="saveTask()">Save Task</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        const members = [
-            { name: "Person 1", img: "profile1.jpg" },
-            { name: "Person 2", img: "profile2.jpg" },
-            { name: "Person 3", img: "profile3.jpg" },
-            // Add all members here with their profile images
+        const teamMembers = [
+            { id: 1, name: 'Alice Johnson', img: 'https://via.placeholder.com/50' },
+            { id: 2, name: 'Bob Smith', img: 'https://via.placeholder.com/50' },
+            { id: 3, name: 'Catherine Lee', img: 'https://via.placeholder.com/50' }
         ];
+        
+        const dummyTasks = [
+            { id: 1, assignee: 'Alice Johnson', task: 'Design the new logo', priority: 'high', time: 5, deadlineDate: '2024-08-15', deadlineTime: '14:00', finished: false, assignedBy: 'Bob Smith' },
+            { id: 2, assignee: 'Bob Smith', task: 'Update website content', priority: 'medium', time: 3, deadlineDate: '2024-08-18', deadlineTime: '16:00', finished: false, assignedBy: 'Catherine Lee' },
+            { id: 3, assignee: 'Catherine Lee', task: 'Organize team meeting', priority: 'low', time: 2, deadlineDate: '2024-08-20', deadlineTime: '10:00', finished: false, assignedBy: 'Alice Johnson' }
+        ];
+
         let currentUser = '';
-        let isAdmin = false;
-
-        function signin() {
-            currentUser = document.getElementById('username').value;
-            if (currentUser) {
-                alert(`Signed in as ${currentUser}`);
-            } else {
-                alert('Please enter your name to sign in.');
-            }
-        }
-
-        function showAdminLogin() {
-            document.getElementById('adminForm').style.display = 'block';
-        }
-
-        function adminLogin() {
-            const password = document.getElementById('adminPassword').value;
-            if (password === 'adminpassword') {  // Simple password check (should be secured)
-                isAdmin = true;
-                alert('Admin login successful');
-                document.getElementById('adminForm').style.display = 'none';
-            } else {
-                alert('Incorrect admin password');
-            }
-        }
 
         function initializeDashboard() {
             const taskGrid = document.getElementById('taskGrid');
-            members.forEach(member => {
+            teamMembers.forEach(member => {
                 const column = document.createElement('div');
-                column.className = 'task-column';
-                column.id = `column-${member.name.replace(/\s+/g, '')}`;
+                column.className = 'col-md-4';
                 column.innerHTML = `
-                    <h3><img src="${member.img}" alt="${member.name}">${member.name}</h3>
-                    <ul class="task-list" id="taskList-${member.name.replace(/\s+/g, '')}"></ul>
+                    <div class="card task-card">
+                        <div class="card-header d-flex align-items-center">
+                            <img src="${member.img}" class="profile-img" alt="${member.name}">
+                            <span>${member.name}</span>
+                        </div>
+                        <ul class="task-list list-group list-group-flush" id="taskList-${member.id}"></ul>
+                    </div>
                 `;
                 taskGrid.appendChild(column);
+
+                const assigneeSelect = document.getElementById('assignee');
+                const option = document.createElement('option');
+                option.value = member.name;
+                option.text = member.name;
+                assigneeSelect.appendChild(option);
             });
 
-            // Display today's date
-            const currentDate = new Date().toLocaleDateString();
-            document.getElementById('currentDate').innerText = `Today's Date: ${currentDate}`;
+            populateTasks();
         }
 
-        function addTask() {
+        function populateTasks() {
+            dummyTasks.forEach(task => {
+                addTaskToUI(task);
+            });
+        }
+
+        function signIn() {
+            currentUser = prompt('Enter your name:');
+            if (currentUser) {
+                alert(`Signed in as ${currentUser}`);
+            }
+        }
+
+        function adminLogin() {
+            const password = prompt('Enter admin password:');
+            if (password === 'adminpassword') {
+                alert('Admin login successful.');
+                addNewUser();
+            } else {
+                alert('Incorrect password.');
+            }
+        }
+
+        function addNewUser() {
+            const newUsername = prompt('Enter new username:');
+            const newPassword = prompt('Enter new password:');
+            if (newUsername && newPassword) {
+                alert(`${newUsername} added successfully.`);
+            }
+        }
+
+        function addTaskToUI(task) {
+            const taskList = document.getElementById(`taskList-${getMemberId(task.assignee)}`);
+            const taskItem = document.createElement('li');
+            taskItem.className = `list-group-item d-flex justify-content-between align-items-start ${getPriorityClass(task.priority)}`;
+            taskItem.innerHTML = `
+                <div>
+                    <div>${task.task}</div>
+                    <small class="task-details">Time: ${task.time} hrs, Deadline: ${task.deadlineDate} ${task.deadlineTime}, Assigned by: ${task.assignedBy}</small>
+                </div>
+                <div class="task-actions">
+                    <button class="btn btn-success btn-sm" onclick="markTaskAsFinished(${task.id})">✓</button>
+                    <button class="btn btn-warning btn-sm" onclick="editTask(${task.id})">✎</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteTask(${task.id})">🗑</button>
+                </div>
+            `;
+            taskList.appendChild(taskItem);
+        }
+
+        function getPriorityClass(priority) {
+            if (priority === 'high') return 'priority-high';
+            if (priority === 'medium') return 'priority-medium';
+            return 'priority-low';
+        }
+
+        function getMemberId(name) {
+            return teamMembers.find(member => member.name === name).id;
+        }
+
+        function filterTasks(filter) {
+            alert(`Filtering tasks by ${filter}`);
+        }
+
+        function saveTask() {
+            const taskId = document.getElementById('taskId').value;
             const assignee = document.getElementById('assignee').value;
             const task = document.getElementById('task').value;
             const priority = document.getElementById('priority').value;
             const time = document.getElementById('time').value;
             const deadlineDate = document.getElementById('deadline-date').value;
             const deadlineTime = document.getElementById('deadline-time').value;
+            const assignedBy = currentUser || 'Admin';
 
-            if (assignee && task && priority && time && deadlineDate && deadlineTime && currentUser) {
-                const taskList = document.getElementById(`taskList-${assignee.replace(/\s+/g, '')}`);
-                const taskItem = document.createElement('li');
-                taskItem.className = `task-item ${priority}`;
-                taskItem.innerHTML = `
-                    <div class="task-details">
-                        <span>${task}</span>
-                        <span class="task-time">Time: ${time} hrs</span>
-                        <span class="task-deadline">Deadline: ${deadlineDate} ${deadlineTime}</span>
-                        <span class="task-assigned-by">Assigned by: ${currentUser}</span>
-                    </div>
-                    <div class="task-actions">
-                        <button class="edit-btn" onclick="editTask(this)">Edit</button>
-                        <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
-                        <button class="finish-btn" onclick="finishTask(this)">Mark Finished</button>
-                    </div>
-                `;
-                taskList.appendChild(taskItem);
-
-                // Clear the form fields
-                document.getElementById('task').value = '';
-                document.getElementById('priority').value = 'low';
-                document.getElementById('time').value = '';
-                document.getElementById('deadline-date').value = '';
-                document.getElementById('deadline-time').value = '';
+            if (taskId) {
+                updateTask(taskId, { assignee, task, priority, time, deadlineDate, deadlineTime, assignedBy });
             } else {
-                alert('Please fill in all fields and sign in before adding a task.');
+                const newTask = {
+                    id: dummyTasks.length + 1,
+                    assignee,
+                    task,
+                    priority,
+                    time,
+                    deadlineDate,
+                    deadlineTime,
+                    finished: false,
+                    assignedBy
+                };
+                dummyTasks.push(newTask);
+                addTaskToUI(newTask);
             }
+
+            document.getElementById('taskForm').reset();
+            document.getElementById('taskId').value = '';
+            bootstrap.Modal.getInstance(document.getElementById('taskModal')).hide();
         }
 
-        function filterTasks(period) {
-            alert(`Filtering tasks for the ${period} view is not yet implemented.`);
+        function markTaskAsFinished(taskId) {
+            const task = dummyTasks.find(task => task.id === taskId);
+            task.finished = true;
+            updateTaskUI(taskId);
         }
 
-        function editTask(button) {
-            alert('Editing tasks is not yet implemented.');
-        }
-
-        function deleteTask(button) {
-            const taskItem = button.closest('.task-item');
-            taskItem.remove();
-        }
-
-        function finishTask(button) {
-            const taskItem = button.closest('.task-item');
+        function updateTaskUI(taskId) {
+            const task = dummyTasks.find(task => task.id === taskId);
+            const taskItem = document.getElementById(`taskList-${getMemberId(task.assignee)}`).querySelector(`li:nth-child(${taskId})`);
             taskItem.classList.add('finished');
         }
 
-        document.addEventListener('DOMContentLoaded', initializeDashboard);
-    </script>
+        function editTask(taskId) {
+            const task = dummyTasks.find(task => task.id === taskId);
+            document.getElementById('taskId').value = task.id;
+            document.getElementById('assignee').value = task.assignee;
+            document.getElementById('task').value = task.task;
+            document.getElementById('priority').value = task.priority;
+            document.getElementById('time').value = task.time;
+            document.getElementById('deadline-date').value = task.deadlineDate;
+            document.getElementById('deadline-time').value = task.deadlineTime;
 
+            const taskModal = new bootstrap.Modal(document.getElementById('taskModal'));
+            taskModal.show();
+        }
+
+        function deleteTask(taskId) {
+            const taskIndex = dummyTasks.findIndex(task => task.id === taskId);
+            dummyTasks.splice(taskIndex, 1);
+            document.getElementById(`taskList-${getMemberId(dummyTasks[taskIndex].assignee)}`).querySelector(`li:nth-child(${taskIndex + 1})`).remove();
+        }
+
+        // Initialize Dashboard
+        initializeDashboard();
+
+    </script>
 </body>
 </html>
